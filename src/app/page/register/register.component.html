@@ -7,7 +7,7 @@
                 <div class="register-form mx-auto">
                     <h2 class="register-header">Đăng ký</h2>
                     <div class="form-group">
-                        <label for="phone">Phone</label>
+                        <label for="phone">Phone:</label>
                         <input type="text" class="form-control" id="phone" [(ngModel)]="phone" required name="phone"
                             (focus)="registerForm.form.markAsTouched">
                         <div class="divider-nospace"></div>
@@ -17,8 +17,16 @@
 
                     <div class="mt-3"></div>
 
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="text" class="form-control" id="email" [(ngModel)]="email" required name="email">
+                        <div class="divider-nospace"></div>
+                    </div>
+
+                    <div class="mt-3"></div>
+
                     <div class="form-group password-field">
-                        <label for="password">Mật khẩu</label>
+                        <label for="password">Mật khẩu:</label>
                         <input type="password" placeholder="Ít nhất 3 kí tự" class="form-control" id="password"
                             [(ngModel)]="password" required name="password">
                         <i class="password-toogle fas fa-eye-slash"></i>
@@ -28,22 +36,23 @@
                     <div class="mt-3"></div>
 
                     <div class="form-group password-field">
-                        <label for="password">Nhập lại mật khẩu</label>
-                        <input type="password" placeholder="Ít nhất 3 kí tự" class="form-control" id="confirm-password"
+                        <label for="retypePassword">Nhập lại mật khẩu:</label>
+                        <input type="password" placeholder="Ít nhất 3 kí tự" class="form-control" id="retypePassword"
                             [(ngModel)]="retypePassword" required name="retypePassword"
                             (input)="registerForm.form.markAsTouched; checkPasswordMatch()">
                         <i class="password-toogle fas fa-eye-slash"></i>
                         <div class="divider-nospace"></div>
-                        <p class="text-danger"
-                            *ngIf="registerForm.controls['retypePassword'].hasError('passwordMismatch') && registerForm.form.touched">Mật khẩu
-                            không khớp
+                        <p class="text-danger" *ngIf="passwordMatching">
+                            <!-- *ngIf="registerForm.errors?.['passwordMismatch']"> -->
+                            <!-- *ngIf="registerForm.controls['retypePassword'].hasError('passwordMismatch') && registerForm.form.touched"> -->
+                            Mật khẩu không khớp
                         </p>
                     </div>
 
                     <div class="mt-3"></div>
 
                     <div class="form-group">
-                        <label for="full-name">Họ và tên</label>
+                        <label for="full-name">Họ và tên:</label>
                         <input type="text" class="form-control" id="full-name" [(ngModel)]="fullName" required
                             name="fullName">
                         <div class="divider-nospace"></div>
@@ -52,13 +61,13 @@
                     <div class="mt-3"></div>
 
                     <div class="form-group">
-                        <label for="birth-date">Năm sinh</label>
-                        <input type="date" class="form-control" required id="birth-date" name="birth-date"
-                            [(ngModel)]="birthDate"
-                            (input)="registerForm.form.markAsTouched(); checkAge()">
+                        <label for="birthDate">Năm sinh:</label>
+                        <input type="date" class="form-control" required id="birthDate" name="birthDate"
+                            [(ngModel)]="birthDate" (input)="registerForm.form.markAsTouched(); checkAge()">
                         <div class="divider-nospace"></div>
-                        <p class="text-danger"
-                            *ngIf="registerForm.controls['birthDate'].hasError('invalidAge') && registerForm.form.touched">
+                        <p class="text-danger" *ngIf="underEighteen">
+                            <!-- *ngIf="registerForm.errors?.['invalidAge']"> -->
+                            <!-- *ngIf="registerForm.controls['birthDate'].hasError('invalidAge') && registerForm.form.touched"> -->
                             Bạn chưa đủ 18 tuổi
                         </p>
                     </div>
@@ -66,20 +75,24 @@
                     <div class="mt-3"></div>
 
                     <div class="form-group">
-                        <label for="address">Địa chỉ</label>
+                        <label for="address">Địa chỉ:</label>
                         <input type="text" class="form-control" id="address" [(ngModel)]="address" name="address">
                         <div class="divider-nospace"></div>
                     </div>
 
+                    <div class="mt-3"></div>
+
                     <div class="form-group">
                         <div class="form-check checkbox-text">
                             <span style="display: flex;">
-                                <input type="checkbox" class="form-check-input" id="agree">
+                                <input type="checkbox" class="form-check-input" id="agree"
+                                    (change)="listenCheckbox($event)">
                                 <label for="agree" class="form-check-label">Tôi đồng ý với các điều kiện</label>
                             </span>
                         </div>
                     </div>
-                    <button type="button" class="register-button" (click)="registerUser()">Đăng ký</button>
+                    <button type="button" class="register-button" [disabled]="!agreeCheckbox"
+                        (click)="registerUser()">Đăng ký</button>
                     <div class="divider"></div>
                     <p class="text-center">Bạn đã có tài khoản ?
                         <span>
