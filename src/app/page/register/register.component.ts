@@ -29,7 +29,6 @@ export class RegisterComponent {
   }
 
   registerUser() {
-    let registerUrl = '/user/register';
     if (this.agreeCheckbox) {
       // call api
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -42,21 +41,24 @@ export class RegisterComponent {
         birthDate: this.birthDate,
         address: this.address
       };
+      console.log(data);
       var jsonData = JSON.stringify(data);
       console.log(jsonData);
 
       this.userService.register(jsonData)
-        .subscribe({
-          next: (response: any) => {
+        .subscribe((response: any) => console.log(response));
 
-          },
-          complete: () => {
+      // .subscribe({
+      //   next: (response: any) => {
 
-          },
-          error: () => {
+      //   },
+      //   complete: () => {
 
-          }
-        });
+      //   },
+      //   error: () => {
+
+      //   }
+      // });
 
       // this.httpClient.post(registerUrl, null, { headers })
       //   .subscribe({
