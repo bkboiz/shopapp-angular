@@ -36,8 +36,8 @@ import { RouterModule } from '@angular/router';
     // HomeComponent,
     // OrderComponent,
     // OrderConfirmComponent,
-    // LoginComponent,
-    RegisterComponent
+    LoginComponent
+    // RegisterComponent
     // DetailProductComponent
   ]
 })

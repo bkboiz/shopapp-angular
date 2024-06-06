@@ -8,10 +8,11 @@
                     <h2 class="register-header">Đăng ký</h2>
                     <div class="form-group">
                         <label for="phone">Phone:</label>
-                        <input type="text" class="form-control" id="phone" [(ngModel)]="phone" required name="phone"
-                            (focus)="registerForm.form.markAsTouched">
+                        <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="phoneNumber" required
+                            name="phoneNumber" (focus)="registerForm.form.markAsTouched">
                         <div class="divider-nospace"></div>
-                        <p class="text-danger" *ngIf="phone.length < 6 && registerForm.form.touched">Số điện thoại phải
+                        <p class="text-danger" *ngIf="phoneNumber.length < 6 && registerForm.form.touched">Số điện thoại
+                            phải
                             nhiều hơn 6 chữ số</p>
                     </div>
 

@@ -6,8 +6,9 @@
             <div class="login-form mx-auto">
                 <h2 class="login-header">Đăng nhập</h2>
                 <div class="form-group">
-                    <label for="email">Email/Phone</label>
-                    <input type="text" class="form-control" id="email">
+                    <label for="phoneNumber">Phone</label>
+                    <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="phoneNumber" required
+                        name="phoneNumber" (focus)="loginForm.form.markAsTouched">
                     <div class="divider-nospace"></div>
                 </div>
 
@@ -15,7 +16,8 @@
 
                 <div class="form-group password-field">
                     <label for="password">Mật khẩu</label>
-                    <input type="password" placeholder="Ít nhất 3 kí tự" class="form-control" id="password">
+                    <input type="password" placeholder="Ít nhất 3 kí tự" class="form-control" id="password"
+                        [(ngModel)]="password" required>
                     <i class="password-toogle fas fa-eye-slash"></i>
                     <div class="divider-nospace"></div>
                 </div>
@@ -37,7 +39,7 @@
                         <option>Quản trị viên</option>
                     </select>
                 </div>
-                <button type="button" class="login-button">Đăng nhập</button>
+                <button type="button" class="login-button" (click)="login()">Đăng nhập</button>
                 <div class="divider"></div>
                 <p class="text-center">Bạn chưa có tài khoản ?
                     <span>

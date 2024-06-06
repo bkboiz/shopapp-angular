@@ -13,7 +13,7 @@ export class RegisterComponent {
 
   @ViewChild('registerForm') registerForm !: NgForm;
 
-  phone = '';
+  phoneNumber = '';
   email = '';
   password = '';
   retypePassword = '';
@@ -36,7 +36,7 @@ export class RegisterComponent {
       var data = {
         fullName: this.fullName,
         email: this.email,
-        phoneNumber: this.phone,
+        phoneNumber: this.phoneNumber,
         password: this.password,
         birthDate: this.birthDate,
         address: this.address
@@ -48,30 +48,6 @@ export class RegisterComponent {
       this.userService.register(jsonData)
         .subscribe((response: any) => console.log(response));
 
-      // .subscribe({
-      //   next: (response: any) => {
-
-      //   },
-      //   complete: () => {
-
-      //   },
-      //   error: () => {
-
-      //   }
-      // });
-
-      // this.httpClient.post(registerUrl, null, { headers })
-      //   .subscribe({
-      //     next: (response: any) => {
-
-      //     },
-      //     complete: () => {
-
-      //     },
-      //     error: () => {
-
-      //     }
-      //   })
     } else {
       alert('Thông tin đăng ký không hợp lệ !!!');
     }
