@@ -24,7 +24,7 @@ export class UserService {
   }
 
   login(loginDto: any): Observable<any> {
-    return this.http.post(this.apiRegister, loginDto, this.apiConfig)
+    return this.http.post(this.apiLogin, loginDto, this.apiConfig)
   }
 
 }

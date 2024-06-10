@@ -12,6 +12,7 @@ import { DetailProductComponent } from './page/detail-product/detail-product.com
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 
 @NgModule({
@@ -31,7 +32,13 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     RouterModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [
     // HomeComponent,
     // OrderComponent,
