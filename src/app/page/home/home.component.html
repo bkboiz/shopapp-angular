@@ -9,9 +9,10 @@
     <div class="search-box">
         <input type="text" class="form-control search-input" placeholder="Tìm sản phẩm"
             (input)="onSearchChange($event)">
-        <select class="form-control product-category">
+        <select class="form-control product-category" (change)="onCategoryChange($event)">
             <option class="product-category" selected disabled>Danh mục sản phẩm</option>
-            <option class="product-category" *ngFor="let category of categories">{{category.name}}</option>
+            <option class="product-category" *ngFor="let category of categories" [value]="category.id">{{category.name}}
+            </option>
             <!-- <option class="product-category">Thời trang</option> -->
             <!-- <option class="product-category">Bánh kẹo</option> -->
         </select>
@@ -22,7 +23,8 @@
         <!-- col-sm: small -->
         <div class="col-lg-4 col-md-6" *ngFor="let product of products">
             <div class="product-item">
-                <img [src]="product.url" alt="Product Image" class="product-image">
+                <img [src]="product.url != '' ? product.url : './assets/img/uncle_Ho.png'" alt="Product Image"
+                    class="product-image">
                 <h3 class="product-name">{{product.name}}</h3>
                 <p class="product-description">{{product.description}}</p>
                 <p class="product-price">Giá: ${{product.price}}</p>
@@ -44,9 +46,9 @@
 
     <div class="pagination">
         <button id="first" (click)="goToFirstPage()" [disabled]="currentPage === 1">&laquo;</button>
-        <button id="prev" (click)="goToPrevPage(currentPage)" [disabled]="currentPage === 1">&lt;</button>
+        <button id="prev" (click)="goToPrevPage()" [disabled]="currentPage === 1">&lt;</button>
         <span id="pageInfo">Page {{currentPage}} of {{totalPages}}</span>
-        <button id="next" (click)="goToNextPage(currentPage)" [disabled]="currentPage === totalPages">&gt;</button>
+        <button id="next" (click)="goToNextPage()" [disabled]="currentPage === totalPages">&gt;</button>
         <button id="last" (click)="goToLastPage()" [disabled]="currentPage === totalPages">&raquo;</button>
     </div>
 </div>

@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit {
   itemPerPage: number = 15;
   pages: number[] = [];
   totalPages: number = 0;
+  keyword: string = '';
   visiblePages: number[] = [];
+  selectedCategory: number = 0;
 
   constructor(private productService: ProductService,
     private categoryService: CategoryService
@@ -25,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
-    this.getProduct(this.currentPage, this.itemPerPage);
+    this.getProduct(this.currentPage, this.itemPerPage, this.selectedCategory, this.keyword);
   }
 
   getCategories() {
@@ -43,19 +45,18 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  getProduct(page: number, limit: number) {
-    this.productService.getProducts(page, limit).subscribe({
+  getProduct(page: number, limit: number, categoryId: number, keyword: string) {
+    this.productService.getProducts(page, limit, categoryId, keyword).subscribe({
       next: (response: any) => {
-        debugger
         response.lstProduct.forEach((product: Product) => {
-          product.url = `http://localhost:8039/api/v1/product/images/${product.thumbnail}`;
+          product.url = product.thumbnail != null ? `http://localhost:8039/api/v1/product/images/${product.thumbnail}` : "";
         });
         this.products = response.lstProduct;
         this.totalPages = response.totalPages;
         this.visiblePages = this.generateVisiblePageArr(this.currentPage, this.totalPages);
       },
       complete: () => {
-        debugger
+
       },
       error: (error: any) => {
         console.log(error);
@@ -78,26 +79,32 @@ export class HomeComponent implements OnInit {
 
   onSearchChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    let keyword = inputElement.value;
-    console.log(keyword);
+    this.keyword = inputElement.value;
+    console.log(this.keyword);
+    this.getProduct(this.currentPage, this.itemPerPage, this.selectedCategory, this.keyword);
+  }
+
+  onCategoryChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedCategory = Number(selectElement.value);
+    console.log(this.selectedCategory);
   }
 
   goToLastPage() {
     this.currentPage = this.totalPages;
-    this.getProduct(this.totalPages, this.itemPerPage);
+    this.getProduct(this.currentPage, this.itemPerPage, this.selectedCategory, this.keyword);
   }
-  goToNextPage(currentPage: number) {
-    this.currentPage = Math.min(currentPage + 1, this.totalPages);
-    let nextPage = currentPage + 1;
-    this.getProduct(this.currentPage, this.itemPerPage)
+  goToNextPage() {
+    this.currentPage = Math.min(this.currentPage + 1, this.totalPages);
+    this.getProduct(this.currentPage, this.itemPerPage, this.selectedCategory, this.keyword);
   }
-  goToPrevPage(currentPage: number) {
-    this.currentPage = Math.max(currentPage - 1, 1);
-    this.getProduct(this.currentPage, this.itemPerPage)
+  goToPrevPage() {
+    this.currentPage = Math.max(this.currentPage - 1, 1);
+    this.getProduct(this.currentPage, this.itemPerPage, this.selectedCategory, this.keyword);
   }
   goToFirstPage() {
     this.currentPage = 1;
-    this.getProduct(1, this.itemPerPage);
+    this.getProduct(this.currentPage, this.itemPerPage, this.selectedCategory, this.keyword);
   }
 
 }
