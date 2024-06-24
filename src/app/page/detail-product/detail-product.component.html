@@ -31,11 +31,9 @@
             <div class="row">
                 <div class="thumbnail-container">
                     <div *ngFor="let image of productDetail.productImages; let i = index" class="thumbnail-item"
-                        [ngClass]="{'active': i === currentImageIndex}">
-                        <div class="thumbnail-item" (click)="selectThumbnail(i)">
-                            <img [src]="'http://localhost:8039/api/v1/product/images/' + image" class="thumbnail-image"
-                                alt="Thumbnail Image">
-                        </div>
+                        [ngClass]="{'active': i === currentImageIndex}" (click)="selectThumbnail(i)">
+                        <img [src]="'http://localhost:8039/api/v1/product/images/' + image" class="thumbnail-image"
+                            alt="Thumbnail Image">
                     </div>
                 </div>
             </div>
@@ -43,19 +41,19 @@
 
         <div class="col-md-6">
             <div class="product-details">
-                <h2>Thông tin chi tiết sản phẩm</h2>
+                <h2>Tên sản phẩm: {{productDetail.name}}</h2>
                 <p>Mô tả sản phẩm:</p>
                 <p>{{productDetail.description}}</p>
                 <p>Giá: ${{productDetail.price}}</p>
                 <div class="product-actions">
-                    <button class="btn btn-primary">Thêm vào giỏ hàng</button>
-                    <button class="btn btn-success">Mua ngay</button>
+                    <button class="btn btn-primary" (click)="addToCart()">Thêm vào giỏ hàng</button>
+                    <button class="btn btn-success" (click)="buyNow()">Mua ngay</button>
                 </div>
                 <div class="product-quantity">
                     <div class="border-wrapper">
-                        <button>-</button>
-                        <input type="text" value="1">
-                        <button>+</button>
+                        <button (click)="decreaseQuantity()" [disabled]="quantity == 0">-</button>
+                        <input type="text" [value]="quantity">
+                        <button (click)="increaseQuantity()">+</button>
                     </div>
                 </div>
             </div>
