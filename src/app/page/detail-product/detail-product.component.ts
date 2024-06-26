@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductDetailResponse } from 'src/app/dtos/response/detail.product.response';
 import { Product } from 'src/app/dtos/response/product.response';
 import { CartService } from 'src/app/service/cart.service';
@@ -20,10 +21,13 @@ export class DetailProductComponent implements OnInit {
   productDetail!: ProductDetailResponse;
 
   constructor(private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.productId = id !== null ? +id : +0;
     this.productService.getProductById(this.productId).subscribe({
       next: (response: any) => {
         console.log(response);

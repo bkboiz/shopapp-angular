@@ -1,14 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
+const API_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private apiRegister = "http://localhost:8039/api/v1/user/register";
-  private apiLogin = "http://localhost:8039/api/v1/user/login";
+  private apiRegister = API_URL + "user/register";
+  private apiLogin = API_URL + "user/login";
   private apiConfig = {
     headers: this.createHeader()
   }

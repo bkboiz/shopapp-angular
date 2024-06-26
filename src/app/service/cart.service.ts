@@ -1,10 +1,14 @@
 import { Injectable } from "@angular/core";
 import { ProductService } from "./product.service";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CartService {
+    private cartItemCount = new BehaviorSubject<number>(0);
+    cartItemCount$ = this.cartItemCount.asObservable();
+
     private cart: Map<number, number> = new Map();
     constructor(private productService: ProductService) {
         const storedCart = localStorage.getItem('cart');
@@ -20,8 +24,7 @@ export class CartService {
         } else {
             this.cart.set(productId, quantity);
         }
-
-        console.log(this.cart);
+        this.cartItemCount.next(quantity);
         this.saveCartToLocalStorage();
     }
 
@@ -32,5 +35,17 @@ export class CartService {
 
     getCart(): Map<number, number> {
         return this.cart;
+    }
+
+    updateCartItemCount(): void {
+        let count = 0;
+        this.cart.forEach(quantity => count += quantity);
+        this.cartItemCount.next(count);
+    }
+
+    getCartItemCnt(): number {
+        let count = 0;
+        this.cart.forEach(quantity => count += quantity);
+        return count;
     }
 }

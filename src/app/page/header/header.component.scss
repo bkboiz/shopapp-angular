@@ -25,3 +25,81 @@ header {
     background-color: rgb(127, 68, 255) !important;
     color: white !important;
 }
+
+/* header.component.css */
+.cart-icon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.icon {
+    font-size: 24px;
+    /* Kích thước của icon giỏ hàng */
+    color: #333;
+    /* Màu sắc của icon */
+}
+
+.cart-badge {
+    position: absolute;
+    top: 0px;
+    /* Điều chỉnh vị trí badge */
+    right: -3px;
+    /* Điều chỉnh vị trí badge */
+    background-color: #ee106c;
+    /* Màu nền của badge */
+    color: white;
+    /* Màu chữ của badge */
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    /* Kích thước chữ của badge */
+    font-weight: bold;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    /* Đảm bảo badge có hình tròn */
+    height: 18px;
+    /* Đảm bảo badge có hình tròn */
+}
+
+/* header.component.css */
+.cart-icon-container,
+.notification-icon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.icon {
+    font-size: 24px;
+    /* Kích thước của icon */
+    color: #333;
+    /* Màu sắc của icon */
+}
+
+.cart-badge,
+.notification-badge {
+    position: absolute;
+    top: -10px;
+    /* Điều chỉnh vị trí badge */
+    right: -10px;
+    /* Điều chỉnh vị trí badge */
+    background-color: #ff5722;
+    /* Màu nền của badge */
+    color: white;
+    /* Màu chữ của badge */
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    /* Kích thước chữ của badge */
+    font-weight: bold;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    /* Đảm bảo badge có hình tròn */
+    height: 18px;
+    /* Đảm bảo badge có hình tròn */
+}

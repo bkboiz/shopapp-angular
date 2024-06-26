@@ -2,8 +2,7 @@
 
 <div class="container">
     <div class="intro-section">
-        <h1>Đây là trang Home</h1>
-        <p>Trang này hiển thị danh sách các sản phẩm</p>
+        <h1>Chào mừng bạn đến với Nhà cái đến từ châu Âu FB88</h1>
     </div>
     <!-- Đoạn này có 1 search box bên trái, combo box bên phải -->
     <div class="search-box">
@@ -22,7 +21,7 @@
         <!-- màn hình kích thước large col-md-6: hiện 2 sản phẩm -->
         <!-- col-sm: small -->
         <div class="col-lg-4 col-md-6" *ngFor="let product of products">
-            <div class="product-item">
+            <div class="product-item" (click)="goToDetailProduct(product.id)">
                 <img [src]="product.url != '' ? product.url : './assets/img/uncle_Ho.png'" alt="Product Image"
                     class="product-image">
                 <h3 class="product-name">{{product.name}}</h3>
@@ -34,11 +33,6 @@
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star-half-alt"></i>
-                </div>
-                <div class="product-actions">
-                    <button class="btn btn-primary">Thêm vào giỏ hàng</button>
-                    <span class="space-x"></span>
-                    <button class="btn btn-success">Mua ngay</button>
                 </div>
             </div>
         </div>

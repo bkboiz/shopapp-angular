@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/dtos/response/category.response';
 import { Product } from 'src/app/dtos/response/product.response';
 import { CategoryService } from 'src/app/service/category.service';
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit {
   selectedCategory: number = 0;
 
   constructor(private productService: ProductService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -105,6 +107,10 @@ export class HomeComponent implements OnInit {
   goToFirstPage() {
     this.currentPage = 1;
     this.getProduct(this.currentPage, this.itemPerPage, this.selectedCategory, this.keyword);
+  }
+
+  goToDetailProduct(productId: number) {
+    this.router.navigate(['/product', productId]);
   }
 
 }
