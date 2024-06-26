@@ -10,16 +10,41 @@
             <h2 class="product-header">Thông tin người nhận</h2>
             <form>
                 <div class="mb-3">
-                    <label for="name" class="form-label">Họ và tên</label>
-                    <input type="text" class="form-control" id="name">
+                    <label for="name" class="form-label">Họ và tên:</label>
+                    <input type="text" class="form-control" [(ngModel)]="fullName" id="name" required>
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="email">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="text" class="form-control" [(ngModel)]="email" id="email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="phone" class="form-label">Số điện thoại</label>
-                    <input type="text" class="form-control" id="phone">
+                    <label for="phone" class="form-label">Số điện thoại:</label>
+                    <input type="text" class="form-control" [(ngModel)]="phoneNumber" id="phone" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Địa chỉ:</label>
+                    <input type="text" class="form-control" [(ngModel)]="address" id="address" required>
+                </div>
+                <div class="mb-3">
+                    <label for="note" class="form-label">Ghi chú:</label>
+                    <input type="text" class="form-control" [(ngModel)]="note" id="note">
+                </div>
+                <div class="mb-3">
+                    <label for="shippingMethod" class="form-label">Phương thức vận chuyển:</label>
+                    <select id="shippingMethod" class="form-select" [(ngModel)]="shippingMethod" name="shippingMethod">
+                        <option class="product-category" value="Shopee Express">Shopee Express</option>
+                        <option class="product-category" value="Nhanh Express">Nhanh Express</option>
+                        <option class="product-category" value="Chậm Express">Chậm Express</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="paymentMethod" class="form-label">Phương thức thanh toán:</label>
+                    <select id="paymentMethod" class="form-select" [(ngModel)]="paymentMethod" name="paymentMethod">
+                        <option class="product-category" value="Shopee Express">Ví điện tử</option>
+                        <option class="product-category" value="Shopee Express">Thẻ Master Card</option>
+                        <option class="product-category" value="Nhanh Express">Thẻ VISA</option>
+                        <option class="product-category" value="Chậm Express">Thanh toán khi nhận hàng</option>
+                    </select>
                 </div>
             </form>
         </div>
@@ -40,7 +65,7 @@
                             <div class="product-info">
                                 <img src="https://images.pexels.com/photos/4050426/pexels-photo-4050426.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                                     alt="Product Image" class="product-image">
-                                <span class="product-name">Tên sản phẩm</span>
+                                <span class="product-name">{{productDetail.name}}</span>
                             </div>
                         </td>
                         <td>2</td>
@@ -52,7 +77,7 @@
                             <div class="product-info">
                                 <img src="https://images.pexels.com/photos/4050426/pexels-photo-4050426.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                                     alt="Product Image" class="product-image">
-                                <span class="product-name">Tên sản phẩm</span>
+                                <span class="product-name">productDetail.name</span>
                             </div>
                         </td>
                         <td>2</td>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetailResponse } from 'src/app/dtos/response/detail.product.response';
 import { Product } from 'src/app/dtos/response/product.response';
 import { CartService } from 'src/app/service/cart.service';
+import { DataService } from 'src/app/service/data.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -22,7 +23,9 @@ export class DetailProductComponent implements OnInit {
 
   constructor(private productService: ProductService,
     private cartService: CartService,
-    private route: ActivatedRoute
+    private dataService: DataService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +35,7 @@ export class DetailProductComponent implements OnInit {
       next: (response: any) => {
         console.log(response);
         this.productDetail = response;
+        console.log(this.productDetail);
         this.totalImage = this.productDetail.productImages.length;
       },
       complete: () => {
@@ -67,8 +71,10 @@ export class DetailProductComponent implements OnInit {
   }
 
   buyNow() {
-
+    this.dataService.setOrderInfo(this.productId, this.quantity);
+    this.router.navigate(['/order']);
   }
+
   increaseQuantity() {
     this.quantity++;
   }
