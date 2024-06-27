@@ -13,8 +13,9 @@ import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { AppComponent } from './app/app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { CartComponent } from './page/cart/cart.component';
+import { AppComponent } from './app.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AppRoutingModule } from './app-routing.module';
     LoginComponent,
     RegisterComponent,
     DetailProductComponent,
-    AppComponent
+    AppComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

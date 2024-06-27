@@ -6,6 +6,7 @@ import { OrderConfirmComponent } from "./page/order-confirm/order-confirm.compon
 import { OrderComponent } from "./page/order/order.component";
 import { RegisterComponent } from "./page/register/register.component";
 import { RouterModule, Routes } from "@angular/router";
+import { CartComponent } from "./page/cart/cart.component";
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
     { path: 'product/:id', component: DetailProductComponent },
     { path: 'order', component: OrderComponent },
     { path: 'order/:id', component: OrderConfirmComponent },
+    { path: 'cart', component: CartComponent }
 ];
 
 @NgModule({

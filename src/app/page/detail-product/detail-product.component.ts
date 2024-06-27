@@ -72,7 +72,7 @@ export class DetailProductComponent implements OnInit {
 
   buyNow() {
     this.dataService.setOrderInfo(this.productId, this.quantity);
-    this.router.navigate(['/order']);
+    this.router.navigate(['/cart']);
   }
 
   increaseQuantity() {

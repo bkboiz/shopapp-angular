@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductDetailResponse } from 'src/app/dtos/response/detail.product.response';
 import { Product } from 'src/app/dtos/response/product.response';
 import { DataService } from 'src/app/service/data.service';
@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/service/product.service';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
+
 
   fullName!: string;
   email!: string;
@@ -35,7 +36,7 @@ export class OrderComponent implements OnInit {
       next: (response: any) => {
         console.log(response);
         this.productDetail = response;
-        console.log(this.productDetail.name);
+        console.log('product name:' + this.productDetail.name);
       },
       complete: () => {
 

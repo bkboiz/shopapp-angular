@@ -8,26 +8,26 @@
     <div class="row">
         <div class="col-md-6">
             <h2 class="product-header">Thông tin người nhận</h2>
-            <form>
+            <form #orderDetailForm="ngForm">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Họ và tên:</label>
-                    <input type="text" class="form-control" [(ngModel)]="fullName" id="name" required>
+                    <label for="fullName" class="form-label">Họ và tên:</label>
+                    <input type="text" class="form-control" [(ngModel)]="fullName" name="fullName" required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email:</label>
-                    <input type="text" class="form-control" [(ngModel)]="email" id="email" required>
+                    <input type="text" class="form-control" [(ngModel)]="email" name="email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="phone" class="form-label">Số điện thoại:</label>
-                    <input type="text" class="form-control" [(ngModel)]="phoneNumber" id="phone" required>
+                    <label for="phoneNumber" class="form-label">Số điện thoại:</label>
+                    <input type="text" class="form-control" [(ngModel)]="phoneNumber" name="phoneNumber" required>
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">Địa chỉ:</label>
-                    <input type="text" class="form-control" [(ngModel)]="address" id="address" required>
+                    <input type="text" class="form-control" [(ngModel)]="address" name="address" required>
                 </div>
                 <div class="mb-3">
                     <label for="note" class="form-label">Ghi chú:</label>
-                    <input type="text" class="form-control" [(ngModel)]="note" id="note">
+                    <input type="text" class="form-control" [(ngModel)]="note" name="note">
                 </div>
                 <div class="mb-3">
                     <label for="shippingMethod" class="form-label">Phương thức vận chuyển:</label>
@@ -63,21 +63,9 @@
                     <tr>
                         <td>
                             <div class="product-info">
-                                <img src="https://images.pexels.com/photos/4050426/pexels-photo-4050426.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                <img [src]="'http://localhost:8039/api/v1/product/images/' + productDetail.thumbnail"
                                     alt="Product Image" class="product-image">
                                 <span class="product-name">{{productDetail.name}}</span>
-                            </div>
-                        </td>
-                        <td>2</td>
-                        <td>100,000 đ</td>
-                        <td>200,000 đ</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="product-info">
-                                <img src="https://images.pexels.com/photos/4050426/pexels-photo-4050426.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    alt="Product Image" class="product-image">
-                                <span class="product-name">productDetail.name</span>
                             </div>
                         </td>
                         <td>2</td>
