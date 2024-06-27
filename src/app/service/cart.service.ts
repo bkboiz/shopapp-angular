@@ -1,13 +1,19 @@
 import { Injectable } from "@angular/core";
 import { ProductService } from "./product.service";
 import { BehaviorSubject } from "rxjs";
+import { ProductDetailResponse } from "../dtos/response/detail.product.response";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CartService {
+
     private cartItemCount = new BehaviorSubject<number>(0);
     cartItemCount$ = this.cartItemCount.asObservable();
+
+    productIdBuyNow!: number;
+
+    private selectedProducts: { productDetail: ProductDetailResponse, quantity: number; }[] = [];
 
     private cart: Map<number, number> = new Map();
     constructor(private productService: ProductService) {
@@ -26,6 +32,15 @@ export class CartService {
         }
         this.cartItemCount.next(quantity);
         this.saveCartToLocalStorage();
+    }
+
+    setSelectedProducts(selectedProducts: { productDetail: ProductDetailResponse, quantity: number; }[]) {
+        this.selectedProducts = selectedProducts;
+        console.log('selected product: ', this.selectedProducts);
+    }
+
+    getSelectedProducts(): any[] {
+        return this.selectedProducts;
     }
 
 
@@ -47,5 +62,13 @@ export class CartService {
         let count = 0;
         this.cart.forEach(quantity => count += quantity);
         return count;
+    }
+
+    setProductBuyNow(productId: number) {
+        this.productIdBuyNow = productId;
+    }
+
+    getProductBuyNow() {
+        return this.productIdBuyNow;
     }
 }

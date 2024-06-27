@@ -15,7 +15,7 @@ export class DetailProductComponent implements OnInit {
 
   currentImageIndex: number = 0;
   totalImage: number = 0;
-  productId: number = 1;
+  productId: number = 0;
   quantity: number = 0;
   product: Product | undefined;
   imageUrls!: string[];
@@ -71,7 +71,8 @@ export class DetailProductComponent implements OnInit {
   }
 
   buyNow() {
-    this.dataService.setOrderInfo(this.productId, this.quantity);
+    this.addToCart();
+    this.cartService.setProductBuyNow(this.productId);
     this.router.navigate(['/cart']);
   }
 
