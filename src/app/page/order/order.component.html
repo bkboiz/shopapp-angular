@@ -40,11 +40,19 @@
                 <div class="mb-3">
                     <label for="paymentMethod" class="form-label">Phương thức thanh toán:</label>
                     <select id="paymentMethod" class="form-select" [(ngModel)]="paymentMethod" name="paymentMethod">
-                        <option class="product-category" value="Shopee Express">Ví điện tử</option>
-                        <option class="product-category" value="Shopee Express">Thẻ Master Card</option>
-                        <option class="product-category" value="Nhanh Express">Thẻ VISA</option>
-                        <option class="product-category" value="Chậm Express">Thanh toán khi nhận hàng</option>
+                        <option class="product-category" value="e-wallet">Ví điện tử</option>
+                        <option class="product-category" value="master-card">Thẻ Master Card/ATM nội địa</option>
+                        <option class="product-category" value="visa">Thẻ VISA</option>
+                        <option class="product-category" value="cash-on-delivery">Thanh toán khi nhận hàng</option>
                     </select>
+                </div>
+                <div *ngIf="paymentMethod === 'master-card'">
+                    <img src="assets/img/ncb.png" [(ngModel)]="paymentType" alt="NCB Logo" class="logo-image"
+                        [class.border]="isBorderVisible" (click)="toggleBorder()" />
+                </div>
+                <div *ngIf="paymentMethod === 'e-wallet'">
+                    <img src="assets/img/vnpay.jpg" [(ngModel)]="paymentType" alt="VNPay Logo" class="logo-image"
+                        [class.border]="isBorderVisible" (click)="toggleBorder()" />
                 </div>
             </form>
         </div>

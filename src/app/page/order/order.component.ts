@@ -20,12 +20,14 @@ export class OrderComponent implements OnInit {
   note!: string;
   shippingMethod!: string;
   paymentMethod!: string;
+  isBorderVisible: boolean = false;
 
   productId!: number;
   quantity!: number;
   totalAmount!: number;
   productDetail!: ProductDetailResponse;
   selectedProducts: { productDetail: ProductDetailResponse, quantity: number; }[] = [];
+  paymentType: any;
 
   constructor(private dataService: DataService,
     private productService: ProductService,
@@ -58,6 +60,10 @@ export class OrderComponent implements OnInit {
 
   formatCurrency(value: number): string {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+  }
+
+  toggleBorder() {
+    this.isBorderVisible = !this.isBorderVisible;
   }
 
 }
