@@ -77,11 +77,22 @@ td {
     background-color: rgb(19, 23, 42);
 }
 
+.logo-container {
+    display: flex;
+    // justify-content: space-around;
+    /* hoặc space-between, center, v.v. tuỳ thuộc vào yêu cầu của bạn */
+}
+
 .logo-image {
     width: 75px;
     height: 75px;
     border-radius: 5px;
     margin: 10px;
+}
+
+.selected .logo-image {
+    border: 2px solid rgb(5, 248, 106);
+    /* hoặc bất kỳ màu nào bạn muốn */
 }
 
 .border {

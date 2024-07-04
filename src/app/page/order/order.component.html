@@ -32,9 +32,9 @@
                 <div class="mb-3">
                     <label for="shippingMethod" class="form-label">Phương thức vận chuyển:</label>
                     <select id="shippingMethod" class="form-select" [(ngModel)]="shippingMethod" name="shippingMethod">
-                        <option class="product-category" value="Shopee Express">Shopee Express</option>
-                        <option class="product-category" value="Nhanh Express">Nhanh Express</option>
-                        <option class="product-category" value="Chậm Express">Chậm Express</option>
+                        <option class="product-category" value="shopee-express">Shopee Express</option>
+                        <option class="product-category" value="fast-express">Nhanh Express</option>
+                        <option class="product-category" value="slow-express">Chậm Express</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -46,9 +46,13 @@
                         <option class="product-category" value="cash-on-delivery">Thanh toán khi nhận hàng</option>
                     </select>
                 </div>
-                <div *ngIf="paymentMethod === 'master-card'">
-                    <img src="assets/img/ncb.png" [(ngModel)]="paymentType" alt="NCB Logo" class="logo-image"
-                        [class.border]="isBorderVisible" (click)="toggleBorder()" />
+                <div *ngIf="paymentMethod === 'master-card'" class="logo-container">
+                    <div (click)="selectBank('ncb')" [class.selected]="bankCode === 'ncb'">
+                        <img src="assets/img/ncb.png" alt="NCB Logo" class="logo-image" />
+                    </div>
+                    <div (click)="selectBank('vnpay')" [class.selected]="bankCode === 'vnpay'">
+                        <img src="assets/img/vnpay.jpg" alt="VNPAY Logo" class="logo-image" />
+                    </div>
                 </div>
                 <div *ngIf="paymentMethod === 'e-wallet'">
                     <img src="assets/img/vnpay.jpg" [(ngModel)]="paymentType" alt="VNPay Logo" class="logo-image"
@@ -93,7 +97,7 @@
                 </div>
             </div>
             <div class="text-end mt-3">
-                <button class="btn btn-gradient">Thanh toán</button>
+                <button class="btn btn-gradient" (click)="orderNow()">Thanh toán</button>
             </div>
         </div>
     </div>

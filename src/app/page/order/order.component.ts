@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductDetailResponse } from 'src/app/dtos/response/detail.product.response';
-import { Product } from 'src/app/dtos/response/product.response';
+import { OrderDetail } from 'src/app/dtos/response/order.detail';
 import { CartService } from 'src/app/service/cart.service';
 import { DataService } from 'src/app/service/data.service';
 import { ProductService } from 'src/app/service/product.service';
@@ -12,7 +12,6 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class OrderComponent implements OnInit {
 
-
   fullName!: string;
   email!: string;
   phoneNumber!: string;
@@ -20,6 +19,7 @@ export class OrderComponent implements OnInit {
   note!: string;
   shippingMethod!: string;
   paymentMethod!: string;
+  bankCode!: string;
   isBorderVisible: boolean = false;
 
   productId!: number;
@@ -28,6 +28,7 @@ export class OrderComponent implements OnInit {
   productDetail!: ProductDetailResponse;
   selectedProducts: { productDetail: ProductDetailResponse, quantity: number; }[] = [];
   paymentType: any;
+  orderDetails: OrderDetail[] = [];
 
   constructor(private dataService: DataService,
     private productService: ProductService,
@@ -35,27 +36,23 @@ export class OrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.productId = this.dataService.getProductId();
-    // this.quantity = this.dataService.getQuantity();
-
-    // this.productService.getProductById(this.productId).subscribe({
-    //   next: (response: any) => {
-    //     console.log(response);
-    //     this.productDetail = response;
-    //     console.log('product name:' + this.productDetail.name);
-    //   },
-    //   complete: () => {
-
-    //   },
-    //   error: (error: any) => {
-    //     debugger
-    //     console.log(error);
-    //   }
-    // })
     this.selectedProducts = this.cartService.getSelectedProducts();
     this.totalAmount = this.selectedProducts.reduce((total, item) => {
       return total + (item.productDetail.price * item.quantity);
     }, 0);
+  }
+
+  orderNow() {
+    var data = {
+      fullName: this.fullName,
+      email: this.email,
+      phoneNumber: this.phoneNumber,
+      address: this.address,
+      note: this.note,
+      shippingMethod: this.shippingMethod,
+      bankCode: this.bankCode,
+    }
+    console.log(data);
   }
 
   formatCurrency(value: number): string {
@@ -64,6 +61,10 @@ export class OrderComponent implements OnInit {
 
   toggleBorder() {
     this.isBorderVisible = !this.isBorderVisible;
+  }
+
+  selectBank(bankCode: string) {
+    this.bankCode = bankCode;
   }
 
 }
