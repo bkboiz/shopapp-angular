@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductDetailResponse } from 'src/app/dtos/response/detail.product.response';
 import { OrderDetail } from 'src/app/dtos/response/order.detail';
 import { CartService } from 'src/app/service/cart.service';
 import { DataService } from 'src/app/service/data.service';
+import { OrderService } from 'src/app/service/order.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -32,6 +34,7 @@ export class OrderComponent implements OnInit {
 
   constructor(private dataService: DataService,
     private productService: ProductService,
+    private orderService: OrderService,
     private cartService: CartService
   ) { }
 
@@ -44,15 +47,26 @@ export class OrderComponent implements OnInit {
 
   orderNow() {
     var data = {
+      userId: 1,
       fullName: this.fullName,
       email: this.email,
       phoneNumber: this.phoneNumber,
       address: this.address,
       note: this.note,
       shippingMethod: this.shippingMethod,
+      paymentMethod: this.paymentMethod,
       bankCode: this.bankCode,
+      totalMoney: this.totalAmount
     }
     console.log(data);
+    this.orderService.order(data).subscribe({
+      next: (response: any) => {
+
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    });
   }
 
   formatCurrency(value: number): string {
