@@ -39,7 +39,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="paymentMethod" class="form-label">Phương thức thanh toán:</label>
-                    <select id="paymentMethod" class="form-select" [(ngModel)]="paymentMethod" name="paymentMethod">
+                    <select id="paymentMethod" class="form-select" [(ngModel)]="paymentMethod" name="paymentMethod"
+                        (change)="onPaymentMethodChange()">
                         <option class="product-category" value="e-wallet">Ví điện tử</option>
                         <option class="product-category" value="master-card">Thẻ Master Card/ATM nội địa</option>
                         <option class="product-category" value="visa">Thẻ VISA</option>

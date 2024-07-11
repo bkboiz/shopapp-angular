@@ -21,7 +21,6 @@ export class OrderService {
     }
 
     order(orderInfo: any): Observable<any> {
-        debugger
         return this.http.post(this.orderApi, orderInfo, this.apiConfig);
     }
 }

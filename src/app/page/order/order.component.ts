@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductDetailResponse } from 'src/app/dtos/response/detail.product.response';
 import { OrderDetail } from 'src/app/dtos/response/order.detail';
 import { CartService } from 'src/app/service/cart.service';
@@ -35,7 +36,8 @@ export class OrderComponent implements OnInit {
   constructor(private dataService: DataService,
     private productService: ProductService,
     private orderService: OrderService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +63,9 @@ export class OrderComponent implements OnInit {
     console.log(data);
     this.orderService.order(data).subscribe({
       next: (response: any) => {
-
+        debugger
+        console.log(response.data);
+        window.location.href = response.data;
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
@@ -79,6 +83,10 @@ export class OrderComponent implements OnInit {
 
   selectBank(bankCode: string) {
     this.bankCode = bankCode;
+  }
+
+  onPaymentMethodChange() {
+    this.bankCode = '';
   }
 
 }
