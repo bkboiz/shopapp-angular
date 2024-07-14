@@ -20,13 +20,13 @@
         <!-- màn hình kích thước large col-lg-4: hiện 3 sản phẩm -->
         <!-- màn hình kích thước large col-md-6: hiện 2 sản phẩm -->
         <!-- col-sm: small -->
-        <div class="col-lg-4 col-md-6" *ngFor="let product of products">
+        <div class="col-lg-3 col-md-4" *ngFor="let product of products">
             <div class="product-item" (click)="goToDetailProduct(product.id)">
                 <img [src]="product.url != '' ? product.url : './assets/img/uncle_Ho.png'" alt="Product Image"
                     class="product-image">
                 <h3 class="product-name">{{product.name}}</h3>
                 <p class="product-description">{{product.description}}</p>
-                <p class="product-price">Giá: ${{product.price}}</p>
+                <p class="product-price">Giá: {{product.price}} VND</p>
                 <div class="product-rating">
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>

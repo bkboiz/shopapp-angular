@@ -1,30 +1,30 @@
-header {
-    background-color: rgba(0, 0, 0, 0);
-    color: rgb(173, 178, 203);
-}
+// header {
+//     background-color: rgba(0, 0, 0, 0);
+//     color: rgb(173, 178, 203);
+// }
 
-.navbar {
-    background-color: rgba(0, 0, 0, 0) !important;
-}
+// .navbar {
+//     background-color: rgba(0, 0, 0, 0) !important;
+// }
 
-.navbar .container {
-    background-color: rgba(0, 0, 0, 0) !important;
-}
+// .navbar .container {
+//     background-color: rgba(0, 0, 0, 0) !important;
+// }
 
-.navbar .container .navbar-brand {
-    color: rgb(173, 178, 203);
-}
+// .navbar .container .navbar-brand {
+//     color: rgb(173, 178, 203);
+// }
 
-.navbar .container .navbar-nav .nav-link {
-    color: rgb(173, 178, 203);
-    border-radius: 18px;
-    padding: 8px 16px;
-}
+// .navbar .container .navbar-nav .nav-link {
+//     color: rgb(173, 178, 203);
+//     border-radius: 18px;
+//     padding: 8px 16px;
+// }
 
-.navbar .container .navbar-nav .nav-link.active {
-    background-color: rgb(127, 68, 255) !important;
-    color: white !important;
-}
+// .navbar .container .navbar-nav .nav-link.active {
+//     background-color: rgb(127, 68, 255) !important;
+//     color: white !important;
+// }
 
 /* header.component.css */
 .cart-icon-container {
@@ -102,4 +102,48 @@ header {
     /* Đảm bảo badge có hình tròn */
     height: 18px;
     /* Đảm bảo badge có hình tròn */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: rgb(173, 178, 203);
+    padding: 10px 20px;
+}
+
+.navbar-left {
+    flex: 1;
+    /* Cho phần bên trái mở rộng */
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.navbar-link {
+    color: rgb(173, 178, 203);
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.navbar-username {
+    margin-left: 15px;
+}
+
+.navbar-divider {
+    margin: 0 15px;
+    /* Điều chỉnh khoảng cách giữa các dấu | */
+}
+
+.navbar-logo {
+    width: 60px;
+    /* Điều chỉnh chiều rộng hình ảnh */
+    height: auto;
+    /* Đảm bảo tỷ lệ khung hình được giữ nguyên */
+    vertical-align: middle;
+    /* Căn giữa hình ảnh */
 }

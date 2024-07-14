@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -38,7 +38,7 @@ export class RegisterComponent {
         email: this.email,
         phoneNumber: this.phoneNumber,
         password: this.password,
-        birthDate: this.birthDate,
+        dateOfBirth: this.birthDate,
         address: this.address
       };
       console.log(data);
@@ -46,7 +46,16 @@ export class RegisterComponent {
       console.log(jsonData);
 
       this.userService.register(jsonData)
-        .subscribe((response: any) => console.log(response));
+        .subscribe({
+          next: (response: HttpResponse<any>) => {
+            console.log(response.status);
+            if (response.status === 200) {
+              this.router.navigate(['/']);
+            }
+          }, error: (error: HttpErrorResponse) => {
+            console.log(error);
+          }
+        });
 
     } else {
       alert('Thông tin đăng ký không hợp lệ !!!');

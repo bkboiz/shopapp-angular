@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { devOnlyGuardedExpression } from '@angular/compiler';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -59,16 +60,20 @@ export class LoginComponent {
     alert(jsonData);
 
     this.userService.login(jsonData).subscribe({
-      next: (response: LoginResponse) => {
-        debugger
-        const { accessToken } = response;
-        if (this.rememberMe) {
-          this.tokenService.setToken(accessToken);
-        }
+      next: (response: HttpResponse<LoginResponse>) => {
+        console.log(response);
+        console.log(response.body);
 
+        if (response.status === 200) {
+          const accessToken = response.body?.accessToken;
+          if (this.rememberMe && accessToken) {
+            this.tokenService.setToken(accessToken);
+            localStorage.setItem('user', JSON.stringify(response.body));
+          }
+          this.router.navigate(['/']);
+        }
       },
       complete: () => {
-        debugger
       },
       error: (error: any) => {
         debugger
