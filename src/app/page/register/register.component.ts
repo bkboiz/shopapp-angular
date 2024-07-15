@@ -50,7 +50,7 @@ export class RegisterComponent {
           next: (response: HttpResponse<any>) => {
             console.log(response.status);
             if (response.status === 200) {
-              this.router.navigate(['/']);
+              this.router.navigate(['/login']);
             }
           }, error: (error: HttpErrorResponse) => {
             console.log(error);

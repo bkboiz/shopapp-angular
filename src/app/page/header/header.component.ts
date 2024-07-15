@@ -9,9 +9,11 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class HeaderComponent implements OnInit {
 
+
   cartItemCnt: number = 0;
   notificationCnt: number = 0;
   username: string | null = null;
+  isDropdownVisible = false;
   constructor(private cartService: CartService,
     private userService: UserService) { }
 
@@ -32,6 +34,14 @@ export class HeaderComponent implements OnInit {
         this.username = user ? user.fullName : null;
       });
     }
+  }
+
+  logout() {
+    this.username = null;
+    localStorage.removeItem('user');
+  }
+  toggleDropdown() {
+    this.isDropdownVisible = !this.isDropdownVisible;
   }
 
 }

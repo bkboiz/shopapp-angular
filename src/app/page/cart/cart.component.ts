@@ -115,4 +115,11 @@ export class CartComponent implements OnInit {
     this.router.navigate(['/order']);
   }
 
+  increaseQuantity(idx: number) {
+    this.productDetails[idx].quantity = this.productDetails[idx].quantity + 1;
+  }
+  decreaseQuantity(idx: number) {
+    this.productDetails[idx].quantity = this.productDetails[idx].quantity - 1;
+  }
+
 }

@@ -27,7 +27,13 @@
                             <span class="product-name">{{item.productDetail.name}}</span>
                         </div>
                     </td>
-                    <td>{{item.quantity}}</td>
+                    <td>
+                        <div>
+                            <button (click)="decreaseQuantity(i)" [disabled]="item.quantity == 0">-</button>
+                            {{item.quantity}}
+                            <button (click)="increaseQuantity(i)">+</button>
+                        </div>
+                    </td>
                     <td>{{formatCurrency(item.productDetail.price)}}</td>
                     <td>{{formatCurrency(item.quantity*item.productDetail.price)}}</td>
                 </tr>

@@ -57,7 +57,14 @@
             </a>
             <span class="navbar-divider">|</span>
             <ng-container *ngIf="username">
-                <span class="navbar-username">Xin chào, {{ username }}</span>
+                <span class="navbar-username" (click)="toggleDropdown()">
+                    Xin chào, {{ username }}
+                    <i class="fas fa-caret-down"></i>
+                </span>
+                <div class="dropdown-menu" *ngIf="isDropdownVisible">
+                    <a routerLink="/my-orders" class="dropdown-item">Đơn hàng của tôi</a>
+                    <a (click)="logout()" class="dropdown-item">Đăng xuất</a>
+                </div>
             </ng-container>
             <ng-container *ngIf="!username">
                 <a routerLink="/login" class="navbar-link">Đăng nhập</a>
