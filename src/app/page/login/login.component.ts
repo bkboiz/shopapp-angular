@@ -32,18 +32,14 @@ export class LoginComponent {
   ) { }
 
   ngOnInit() {
-    debugger
     this.roleService.getRoles().subscribe({
       next: (roles: Role[]) => {
-        debugger
         this.roles = roles;
         this.selectedRole = roles.length > 0 ? roles[0] : undefined;
       },
       complete() {
-        debugger
       },
       error(err) {
-        debugger
         console.error('Error get role:', err);
       },
     })
@@ -57,7 +53,6 @@ export class LoginComponent {
       roleId: this.selectedRole?.id ?? 1
     }
     var jsonData = JSON.stringify(data);
-    alert(jsonData);
 
     this.userService.login(jsonData).subscribe({
       next: (response: HttpResponse<LoginResponse>) => {
@@ -76,7 +71,6 @@ export class LoginComponent {
       complete: () => {
       },
       error: (error: any) => {
-        debugger
         alert(`Can not login, error: ${error.error}`)
       }
     })

@@ -25,7 +25,19 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     let productIdBuyNow = this.cartService.getProductBuyNow();
-    this.cart = this.cartService.getCart();
+    // this.cart = this.cartService.getCart();
+
+    const user = localStorage.getItem('user');
+
+    if (!user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    const userId = JSON.parse(user).userId;
+    console.log('userId', userId);
+
+    this.cart = this.cartService.getCartByUserId(userId);
     this.cart.forEach((quantity: number, productId: number) => {
       this.productService.getProductById(productId).subscribe({
         next: (response: any) => {

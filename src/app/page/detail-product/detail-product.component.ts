@@ -1,5 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { ProductDetailResponse } from 'src/app/dtos/response/detail.product.response';
 import { Product } from 'src/app/dtos/response/product.response';
 import { CartService } from 'src/app/service/cart.service';
@@ -42,7 +44,6 @@ export class DetailProductComponent implements OnInit {
 
       },
       error: (error: any) => {
-        debugger
         console.log(error);
       }
     })
@@ -64,7 +65,28 @@ export class DetailProductComponent implements OnInit {
 
   addToCart() {
     if (this.productDetail) {
-      this.cartService.addToCart(this.productDetail.id, this.quantity);
+      const user = localStorage.getItem('user');
+
+      if (!user) {
+        this.router.navigate(['/login']);
+        return;
+      }
+
+      const userId = JSON.parse(user).userId;
+      var cartDTO = {
+        userId: userId,
+        productId: this.productDetail.id,
+        quantity: this.quantity
+      };
+      const jsonData = JSON.stringify(cartDTO);
+      this.cartService.addToCart(jsonData).subscribe({
+        next: (response: any) => {
+          this.cartService.updateCartCount(this.quantity);
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error);
+        }
+      });
     } else {
       console.error('Lỗi khi thêm giỏ hàng, product = ', this.product);
     }

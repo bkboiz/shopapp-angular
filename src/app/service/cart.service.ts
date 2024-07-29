@@ -1,12 +1,16 @@
 import { Injectable } from "@angular/core";
 import { ProductService } from "./product.service";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { ProductDetailResponse } from "../dtos/response/detail.product.response";
+import { environment } from "src/environments/environment";
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from "@angular/common/http";
+const API_URL = environment.apiUrl;
 
 @Injectable({
     providedIn: 'root'
 })
 export class CartService {
+    private cartEndpoint = API_URL + "cart";
 
     private cartItemCount = new BehaviorSubject<number>(0);
     cartItemCount$ = this.cartItemCount.asObservable();
@@ -16,22 +20,30 @@ export class CartService {
     private selectedProducts: { productDetail: ProductDetailResponse, quantity: number; }[] = [];
 
     private cart: Map<number, number> = new Map();
-    constructor(private productService: ProductService) {
+    constructor(private productService: ProductService, private http: HttpClient) {
         const storedCart = localStorage.getItem('cart');
         if (storedCart) {
             this.cart = new Map(JSON.parse(storedCart));
         }
     }
 
-    addToCart(productId: number, quantity: number) {
-        console.log(productId, quantity);
-        if (this.cart.has(productId)) {
-            this.cart.set(productId, this.cart.get(productId)! + quantity);
-        } else {
-            this.cart.set(productId, quantity);
-        }
-        this.cartItemCount.next(quantity);
-        this.saveCartToLocalStorage();
+    private createHeader(): HttpHeaders {
+        return new HttpHeaders({ 'Content-Type': 'application/json' });
+    }
+
+    getCartByUserId(userId: number): Observable<any> {
+        const params = new HttpParams()
+            .set('userId', userId);
+        return this.http.get<any>(this.cartEndpoint, { params });
+    }
+
+    addToCart(data: any): Observable<HttpResponse<any>> {
+        return this.http.post<any>(this.cartEndpoint, data,
+            { headers: this.createHeader(), observe: 'response' });
+    }
+
+    updateCartCount(count: number) {
+        this.cartItemCount.next(count);
     }
 
     setSelectedProducts(selectedProducts: { productDetail: ProductDetailResponse, quantity: number; }[]) {
