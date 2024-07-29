@@ -1,5 +1,6 @@
 .container {
     color: white;
+    height: 100vh;
 }
 
 .intro-section {
@@ -31,11 +32,11 @@ th:first-child {
 }
 
 th:nth-child(2) {
-    width: 50% !important;
+    width: 40% !important;
 }
 
 th:nth-child(3) {
-    width: 5% !important;
+    width: 15% !important;
 }
 
 th:nth-child(4) {

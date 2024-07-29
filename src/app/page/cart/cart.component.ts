@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductDetailResponse } from 'src/app/dtos/response/detail.product.response';
@@ -37,25 +38,35 @@ export class CartComponent implements OnInit {
     const userId = JSON.parse(user).userId;
     console.log('userId', userId);
 
-    this.cart = this.cartService.getCartByUserId(userId);
-    this.cart.forEach((quantity: number, productId: number) => {
-      this.productService.getProductById(productId).subscribe({
-        next: (response: any) => {
-          console.log(productIdBuyNow, response.id);
-          if (response.id == productIdBuyNow) {
-            this.productDetails.push({ productDetail: response, quantity, selected: true });
-            this.selectedProducts.push({ productDetail: response, quantity });
-          } else {
-            this.productDetails.push({ productDetail: response, quantity, selected: false });
-          }
-        },
-        complete: () => {
-          this.calculateTotalAmount();
-        },
-        error: (error: any) => {
-          console.log(error);
-        }
-      })
+    this.cart = this.cartService.getCartByUserId(userId).subscribe({
+      next: (response: any) => {
+        this.cart = response;
+        console.log('cartttt', this.cart);
+
+        this.cart.forEach((item: any) => {
+          const quantity = item.quantity;
+          this.productService.getProductById(item.productId).subscribe({
+            next: (response: any) => {
+              console.log(productIdBuyNow, response.id);
+              if (response.id == productIdBuyNow) {
+                this.productDetails.push({ productDetail: response, quantity, selected: true });
+                this.selectedProducts.push({ productDetail: response, quantity });
+              } else {
+                this.productDetails.push({ productDetail: response, quantity, selected: false });
+              }
+            },
+            complete: () => {
+              this.calculateTotalAmount();
+            },
+            error: (error: any) => {
+              console.log(error);
+            }
+          })
+        });
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+      }
     });
   }
 
