@@ -10,8 +10,9 @@
     </div>
 
     <div class="text-center mt-3">
-        <button class="btn btn-gradient" type="button">Tiếp tục mua sắm</button>
-        <button class="btn btn-gradient ms-5" type="button" *ngIf="response != '00'">Thanh toán lại</button>
+        <button class="btn btn-gradient" type="button" routerLink="/">Tiếp tục mua sắm</button>
+        <button class="btn btn-gradient ms-5" type="button" *ngIf="response != '00'" routerLink="/cart">Thanh toán
+            lại</button>
 
     </div>
 

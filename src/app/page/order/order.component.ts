@@ -5,6 +5,7 @@ import { ProductDetailResponse } from 'src/app/dtos/response/detail.product.resp
 import { OrderDetail } from 'src/app/dtos/response/order.detail';
 import { CartService } from 'src/app/service/cart.service';
 import { DataService } from 'src/app/service/data.service';
+import { LocalStorageService } from 'src/app/service/localstorage.service';
 import { OrderService } from 'src/app/service/order.service';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -15,6 +16,7 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class OrderComponent implements OnInit {
 
+  userId!: number;
   fullName!: string;
   email!: string;
   phoneNumber!: string;
@@ -37,6 +39,7 @@ export class OrderComponent implements OnInit {
     private productService: ProductService,
     private orderService: OrderService,
     private cartService: CartService,
+    private localStorageService: LocalStorageService,
     private router: Router
   ) { }
 
@@ -48,8 +51,22 @@ export class OrderComponent implements OnInit {
   }
 
   orderNow() {
+    this.userId = this.localStorageService.getUserId();
+    if (this.userId == 0) {
+      this.router.navigate(['/login']);
+    }
+
+    var orderDetailRequest = this.selectedProducts.map(product => {
+      return {
+        productId: product.productDetail.id,
+        quantity: product.quantity,
+        price: product.productDetail.price,
+        totalMoney: product.productDetail.price * product.quantity
+      }
+    })
+
     var data = {
-      userId: 1,
+      userId: this.userId,
       fullName: this.fullName,
       email: this.email,
       phoneNumber: this.phoneNumber,
@@ -58,12 +75,12 @@ export class OrderComponent implements OnInit {
       shippingMethod: this.shippingMethod,
       paymentMethod: this.paymentMethod,
       bankCode: this.bankCode,
-      totalMoney: this.totalAmount
+      totalMoney: this.totalAmount,
+      lstOrderDetail: orderDetailRequest
     }
-    console.log(data);
+    console.log('order info', data);
     this.orderService.order(data).subscribe({
       next: (response: any) => {
-        debugger
         console.log(response.data);
         window.location.href = response.data;
       },
